@@ -1,13 +1,18 @@
 #include "game.h"
+#include "ga.h"
 #include <ncurses.h>
 #include <stdlib.h>
 
 #define WIDTH 10
 #define HEIGHT 10
+#define GENEPOOL_COUNT 50
 
 int main() {
-  GameWorld* world = createWorld(HEIGHT, WIDTH);
-  initscr();
+  prepGA();
+  //GameWorld* world = createRanWorld(WIDTH, HEIGHT);
+  ScoredWorld** worldPool = seedWorlds(GENEPOOL_COUNT, WIDTH, HEIGHT);
+
+  /*initscr();
   noecho();
   curs_set(FALSE);
   while(1) {
@@ -25,6 +30,6 @@ int main() {
     }
     refresh();
   }
-  endwin();
+  endwin();*/
   return 1;
 }
