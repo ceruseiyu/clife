@@ -3,6 +3,8 @@
 #include <time.h>
 #include <stdlib.h>
 
+#define POOL_ITERATIONS 30
+
 void prepGA() {
   srand(time(NULL));
 }
@@ -25,7 +27,7 @@ GameWorld* createRanWorld(int width, int height) {
 }
 
 ScoredWorld** seedWorlds(int count, int width, int height) {
-  ScoredWorld** worldPool = malloc(sizeof(ScoreWorld*) * count);
+  ScoredWorld** worldPool = malloc(sizeof(ScoredWorld*) * count);
   if(worldPool == NULL) {
     return NULL;
   }
@@ -44,7 +46,7 @@ ScoredWorld** seedWorlds(int count, int width, int height) {
     }
 
     worldPool[i]->world = createRanWorld(width, height);
-    if(worldPOol[i]->world == NULL) {
+    if(worldPool[i]->world == NULL) {
       if(worldPool[i] == NULL) {
         int j;
         for(j = 0; j < i; j++) {
@@ -57,10 +59,24 @@ ScoredWorld** seedWorlds(int count, int width, int height) {
       }
     }
 
-    worldPool[i]->score = scoreWorld(worldPool[i]->world);
+    worldPool[i]->score = scoreWorld(worldPool[i]->world, POOL_ITERATIONS);
   }
 }
 
-int scoreWorld(GameWorld* world) {
-  return 1;
+int scoreWorld(GameWorld* world, int iterations) {
+  GameWorld* clone = cloneWorld(world);
+  int i;
+  for(i = 0; i < iterations; i++) {
+    simWorld(clone);
+  }
+
+  int score = 0;
+  int j;
+  for(i = 0; i < world->width; i++) {
+    for(j = 0; j < world->height; j++) {
+      score += world->data[i][j];
+    }
+  }
+
+  return score;
 }

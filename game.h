@@ -9,6 +9,8 @@ typedef struct golworld {
 
 GameWorld* createWorld(int width, int height);
 
+GameWorld* cloneWorld(GameWorld* world);
+
 void printWorld(GameWorld* world);
 
 int cellValue(GameWorld* world, int cellX, int cellY);

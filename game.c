@@ -27,6 +27,34 @@ GameWorld* createWorld(int width, int height) {
   return world;
 }
 
+GameWorld* cloneWorld(GameWorld* world) {
+  if(world == NULL) {
+    return NULL;
+  }
+  GameWorld* clone = malloc(sizeof(GameWorld));
+  if(clone == NULL) {
+    return NULL;
+  }
+  clone->data = malloc(sizeof(int*) * world->height);
+  if(clone->data == NULL) {
+    return NULL;
+  }
+  int i;
+  for(i = 0; i < world->height; i++) {
+    clone->data[i] = malloc(sizeof(int) * world->width);
+    if(clone->data[i] == NULL) {
+      return NULL;
+    }
+    int j;
+    for(j = 0; j < world->width; j++) {
+      clone->data[i][j] = world->data[i][j];
+    }
+  }
+  clone->height = world->height;
+  clone->width = world->width;
+  return clone;
+}
+
 void printWorld(GameWorld* world) {
   int i;
   for(i = 0; i < world->height; i++) {
