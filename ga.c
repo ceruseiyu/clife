@@ -1,5 +1,6 @@
 #include "ga.h"
 #include "game.h"
+#include "qs.h"
 #include <time.h>
 #include <stdlib.h>
 
@@ -61,6 +62,11 @@ ScoredWorld** seedWorlds(int count, int width, int height) {
 
     worldPool[i]->score = scoreWorld(worldPool[i]->world, POOL_ITERATIONS);
   }
+  return worldPool;
+}
+
+void sortWorlds(ScoredWorld** worlds, int count) {
+  quickSort(worlds, 0, count-1);
 }
 
 int scoreWorld(GameWorld* world, int iterations) {
