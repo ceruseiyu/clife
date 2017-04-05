@@ -12,17 +12,7 @@ int main() {
   prepGA();
   //GameWorld* world = createRanWorld(WIDTH, HEIGHT);
   ScoredWorld** worldPool = seedWorlds(GENEPOOL_COUNT, WIDTH, HEIGHT);
-    int i;
-  for(i = 0; i < GENEPOOL_COUNT; i++) {
-    printf("%d\n",worldPool[i]->score);
-  }
-
-  printf("Sorted:\n");
-  sortWorlds(worldPool, GENEPOOL_COUNT);
-
-  for(i = 0; i < GENEPOOL_COUNT; i++) {
-    printf("%d\n",worldPool[i]->score);
-  }
+  runGenerations(worldPool, GENERATIONS, GENEPOOL_COUNT);
   /*initscr();
   noecho();
   curs_set(FALSE);
