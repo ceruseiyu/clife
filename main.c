@@ -6,13 +6,15 @@
 #define WIDTH 25
 #define HEIGHT 25
 #define GENEPOOL_COUNT 50
-#define GENERATIONS 10
+#define GENERATIONS 40
 
 int main() {
   prepGA();
   //GameWorld* world = createRanWorld(WIDTH, HEIGHT);
   ScoredWorld** worldPool = seedWorlds(GENEPOOL_COUNT, WIDTH, HEIGHT);
+  printf("%d\n",worldPool[49]->score);
   runGenerations(worldPool, GENERATIONS, GENEPOOL_COUNT);
+  printf("%d\n",worldPool[49]->score);
   /*initscr();
   noecho();
   curs_set(FALSE);

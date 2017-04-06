@@ -141,7 +141,9 @@ void runGenerations(ScoredWorld** worlds, int genCount, int worldCount) {
     for(j = 1; j < worldCount; j++) {
       int leftWorld = pickWorld(worldCount);
       int rightWorld = pickWorld(worldCount);
-      crossOver(worlds[i]->world, oldWorlds[leftWorld]->world, oldWorlds[rightWorld]->world);
+      crossOver(worlds[j]->world, oldWorlds[leftWorld]->world, oldWorlds[rightWorld]->world);
+      worlds[j]->score = scoreWorld(worlds[j]->world, genCount);
     }
+    sortWorlds(worlds, worldCount);
   }
 }
