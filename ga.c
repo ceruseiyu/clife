@@ -66,7 +66,7 @@ ScoredWorld** seedWorlds(int count, int width, int height) {
 }
 
 void sortWorlds(ScoredWorld** worlds, int count) {
-  quickSort(worlds, 0, count-1);
+  quickSort(worlds, 0, count - 1);
 }
 
 int scoreWorld(GameWorld* world, int iterations) {
